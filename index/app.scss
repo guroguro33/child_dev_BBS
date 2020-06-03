@@ -1,70 +1,14 @@
 @charset "utf-8";
 
-// Variables
-@import 'variables';
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  box-sizing: border-box;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-  box-sizing: border-box;
-}
-body {
-  line-height: 1;
-}
-ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
 
 // ==============================
 // ブレイクポイント
 // ==============================
 $breakpoints: (
-  'sm': 'screen and (max-width: 480px)',
-  'md': 'screen and (max-width: 896px)',
-  'lg': 'screen and (max-width: 1024px)',
-  'xl': 'screen and (max-width: 1200px)',
+  'sm': 'screen and (max-width: 576px)',
+  'md': 'screen and (max-width: 768px)',
+  'lg': 'screen and (max-width: 992px)',
+  'xl': 'screen and (max-width: 1200x)',
 ) !default;
 
 @mixin mq($breakpoint: sm){
@@ -116,6 +60,9 @@ html, body {
   font-size: $font-size_default;
   font-family: $font-family_main;
   text-size-adjust: 100%;
+  @include mq(md){
+    font-size: $font-size_m;
+  }
 }
 
 p, a {
@@ -136,6 +83,10 @@ img {
 input{
   font-size: inherit;
   font-family: inherit;
+  border-style: none;
+}
+textarea{
+  border-style: none;
 }
 // ==================================
 // header
@@ -147,4 +98,55 @@ input{
 }
 .navbar-brand{
   line-height: 70px;
+}
+// ==================================
+// top-view
+// ==================================
+.hero-view{
+  height: 600px;
+  background-image: url(./img/top.jpg);
+  background-size: cover;
+  background-position: center;
+  @include mq(md){
+    height: 300px;
+  }
+}
+.hero-msg{
+  padding-top: 60px;
+  color: $font-color_option;
+  @include mq(md){
+    padding-top: 20px;
+  }
+}
+.new{
+  margin-right: 200px;
+  @include mq(md){
+    margin-right: 100px;
+  }
+}
+
+// ==================================
+// footer
+// ==================================
+footer{
+  height: 70px;
+  background-color: $color_main;
+  color: $color_w;
+}
+// ==================================
+// utility
+// ==================================
+.underline{
+  padding-bottom: 1rem;
+  border-bottom: solid 2px;
+}
+.switch a:hover{
+  color: $font-color_default;
+  text-decoration: none;
+}
+.fw-normal{
+  font-weight: 400;
+}
+.heart{
+  fill: #E66767;
 }

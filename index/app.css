@@ -1,0 +1,117 @@
+@charset "UTF-8";
+html, body {
+  width: 100%;
+  background-color: #F2F2F2;
+  text-align: center;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: #333333;
+  font-size: 16px;
+  font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  html, body {
+    font-size: 14px;
+  }
+}
+
+p, a {
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  display: block;
+  color: #333333;
+  text-decoration: none;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+img {
+  width: 100%;
+  vertical-align: bottom;
+}
+
+input {
+  font-size: inherit;
+  font-family: inherit;
+  border-style: none;
+}
+
+textarea {
+  border-style: none;
+}
+
+.title-logo {
+  display: inline-block;
+  width: 70px;
+  height: 56px;
+}
+
+.navbar-brand {
+  line-height: 70px;
+}
+
+.hero-view {
+  height: 600px;
+  background-image: url(./img/top.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-view {
+    height: 300px;
+  }
+}
+
+.hero-msg {
+  padding-top: 60px;
+  color: #98A6B5;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-msg {
+    padding-top: 20px;
+  }
+}
+
+.new {
+  margin-right: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .new {
+    margin-right: 100px;
+  }
+}
+
+footer {
+  height: 70px;
+  background-color: #A7D2CF;
+  color: #FFFFFF;
+}
+
+.underline {
+  padding-bottom: 1rem;
+  border-bottom: solid 2px;
+}
+
+.switch a:hover {
+  color: #333333;
+  text-decoration: none;
+}
+
+.fw-normal {
+  font-weight: 400;
+}
+
+.heart {
+  fill: #E66767;
+}
+/*# sourceMappingURL=app.css.map */
