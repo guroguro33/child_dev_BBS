@@ -154,11 +154,15 @@
 
       <h5 class="text-secondary py-3">回答する</h5>
 
-      <from class="">
-        <textarea name="answer" class="w-100 p-2 my-3" cols="30" rows="10"></textarea>
-        <span class="text-danger d-block mb-2">入力必須</span>
-
+      <from class="col-lg-6 col-12 mx-auto my-3 d-block">
+        <textarea name="answer" class="w-100 my-2 p-3" cols="30" rows="10" placeholder="入力してください"></textarea>
+        <span class="text-danger d-block text-left mb-2">入力必須</span>
+        <input type="submit" class="btn btn-info d-block px-5 mx-auto my-4" value="登録"
+          onclick="return confirm('この内容で登録してよろしいですか？')">
       </from>
+
+      <a href="" class="text-secondary mb-4">もどる</a>
+
 
     </main>
     <footer class="d-flex justify-content-center align-items-center">

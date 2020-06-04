@@ -57,7 +57,7 @@ html, body {
   line-height: 1.6;
   letter-spacing: 0.1em;
   color: $font-color_default;
-  font-size: $font-size_default;
+  font-size: $font-size_m;
   font-family: $font-family_main;
   text-size-adjust: 100%;
   @include mq(md){
