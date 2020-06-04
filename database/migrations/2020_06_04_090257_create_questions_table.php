@@ -15,7 +15,11 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id')->references('id')->on('users');
+            $table->string('title');
+            $table->text('detail');
             $table->timestamps();
+            $table->boolean('delete_flg')->default('0');
         });
     }
 
