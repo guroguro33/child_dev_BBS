@@ -15,10 +15,14 @@ class CreateLikesTable extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('answer_id')->references('id')->on('answers');
-            $table->integer('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('answer_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->boolean('delete_flg')->default('0');
+
+            // FK設定
+            $table->foreign('answer_id')->references('id')->on('answers');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

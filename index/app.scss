@@ -60,9 +60,6 @@ html, body {
   font-size: $font-size_m;
   font-family: $font-family_main;
   text-size-adjust: 100%;
-  @include mq(md){
-    font-size: $font-size_m;
-  }
 }
 
 p, a {

@@ -15,11 +15,16 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('question_id')->references('id')->on('questions');
-            $table->integer('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('question_id');
+            $table->unsignedBigInteger('user_id');
             $table->text('detail');
             $table->timestamps();
             $table->boolean('delete_flg')->default('0');
+
+            // FK設定
+            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('user_id')->references('id')->on('users');
+
         });
     }
 

@@ -15,7 +15,14 @@ class CreateTagMapTable extends Migration
     {
         Schema::create('tag_map', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('question_id');
+            $table->unsignedBigInteger('tag_id');
             $table->timestamps();
+            $table->boolean('delete_flg')->default('0');
+
+            // FK設定
+            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 

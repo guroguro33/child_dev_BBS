@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'QuestionsController@index')->name('questions.index'); // ホーム画面
+Route::get('/questions/{id}/show', 'QuestionsController@show')->name('questions.show'); //  質問詳細画面
+
+Route::group(['middleware' => 'auth'], function() {
+  Route::get('/questions/new', 'QuestionsController@create')->name('questions.create'); //  質問作成画面
+  Route::post('/questions/new', 'QuestionsController@store')->name('questions.store'); //  質問登録
+  Route::get('/questions/{id}/edit', 'QuestionsController@edit')->name('questions.edit');  //  質問編集画面
+  Route::post('/questions/{id}/edit', 'QuestionsController@update')->name('questions.update');  //  質問編集
+  Route::get('/questions/{id}/del', 'QuestionsController@delete')->name('questions.delete');  //  質問削除
+  Route::get('/mypage', 'QuestionsController@mypage')->name('questions.mypage'); // マイページ
 });
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function(){
+  return redirect('/');
+});

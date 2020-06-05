@@ -15,11 +15,13 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->text('detail');
             $table->timestamps();
             $table->boolean('delete_flg')->default('0');
+            // FK設定
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
