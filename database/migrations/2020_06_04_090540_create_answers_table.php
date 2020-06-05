@@ -22,7 +22,7 @@ class CreateAnswersTable extends Migration
             $table->boolean('delete_flg')->default('0');
 
             // FK設定
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
 
         });

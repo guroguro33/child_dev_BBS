@@ -30,15 +30,19 @@ class QuestionsController extends Controller
         return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
       }
 
-      // 質問とタグを取得
+      // 各テーブル情報を取得
       $question = Question::find($id);
-      $user = $question->user;
+      $ques_user = $question->user;
       $tags = $question->tags;
+      $count = $question->answers()->count();
+      $answers = $question->with([
+        'answers',
+        'answers.user'
+      ])->get()->find($id);
 
+      // dd($answers->toArray());
 
-      // dd($question->toArray());
-
-      return view('questions.show', compact('question', 'user', 'tags'));
+      return view('questions.show', compact('question', 'ques_user', 'tags', 'count', 'answers'));
     }
 
     public function create()
@@ -125,8 +129,7 @@ class QuestionsController extends Controller
 
     public function delete($id) {
       
-      $question = Question::find($id);
-      $question->delete();
+      Auth::user()->questions()->find($id)->delete();
 
       // リダイレクトする
       // sessionフラッシュにメッセージ格納

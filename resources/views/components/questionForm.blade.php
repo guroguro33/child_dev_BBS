@@ -43,6 +43,7 @@
   
   @if(!empty($question))
   <form action="{{ route('questions.delete', $question->id) }}" method="GET">
+    @csrf
     <input type="submit" class="btn btn-danger d-block px-5 mx-auto my-5" value="削除"
       onclick="return confirm('本当に削除してよろしいですか？')">
     </form>

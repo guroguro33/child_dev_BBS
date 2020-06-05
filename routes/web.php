@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/questions/{id}/edit', 'QuestionsController@update')->name('questions.update');  //  質問編集
   Route::get('/questions/{id}/del', 'QuestionsController@delete')->name('questions.delete');  //  質問削除
   Route::get('/mypage', 'QuestionsController@mypage')->name('questions.mypage'); // マイページ
+  Route::post('/question/{id}/show', 'AnswersController@store')->name('answers.store'); // 回答登録
+  Route::get('/question/{id}/del', 'AnswersController@delete')->name('answers.delete'); // 回答削除
 });
 
 
