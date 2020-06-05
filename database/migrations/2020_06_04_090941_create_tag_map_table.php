@@ -21,8 +21,8 @@ class CreateTagMapTable extends Migration
             $table->boolean('delete_flg')->default('0');
 
             // FK設定
-            $table->foreign('question_id')->references('id')->on('questions');
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 

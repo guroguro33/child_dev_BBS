@@ -25,6 +25,7 @@ class QuestionsController extends Controller
     
     public function show($id) {
 
+      // GETパラメータが数字かチェック
       if(!ctype_digit($id)){
         return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
       }
@@ -57,18 +58,22 @@ class QuestionsController extends Controller
         Auth::user()->questions()->save($question->fill($request->all()));
         
         // tagsテーブルの処理
-        $tags = [];
-        $i = 1;
-        $tag_name = 'tag'.$i; 
+        $tag_ids = [];
 
-        while(!empty($request->$tag_name)){
-          $tags[] = ['name' => $request->$tag_name];
-          $i++;
-          $tag_name = 'tag'.$i;
+        for($i = 1; $i <= 2; $i++){
+          $tag_name = 'tag'.$i; 
+          if(!empty($request->$tag_name)){
+            // DBにデータが存在する場合は取得し、存在しない場合はDBにデータを登録した上でインスタンスを取得する
+            $tag = Tag::firstOrCreate([
+              'name' => $request->$tag_name
+            ]);
+            $tag_ids[] = $tag->id;
+          }
         }
 
-        // createManyで複数のproblemに登録
-        $question->tags()->createMany($tags);
+        // 中間テーブルに登録
+        $question->tags()->detach();
+        $question->tags()->attach($tag_ids);
 
 
         // リダイレクトする
@@ -84,9 +89,33 @@ class QuestionsController extends Controller
       return view('questions.edit', compact('question','tags'));
     }
 
-    public function update($id) {
+    public function update(QuestionRequest $request, $id) {
+      // GETパラメータが数字かチェック
+      if(!ctype_digit($id)){
+        return redirect('/')->with('flash_message', __('Invalid operation was performed.'));
+      }
       
+      // questionsテーブルの更新
       $question = Question::find($id);
+      $question->fill($request->all())->save();
+
+      // tagsテーブルの処理
+        $tag_ids = [];
+
+        for($i = 1; $i <= 2; $i++){
+          $tag_name = 'tag'.$i; 
+          if(!empty($request->$tag_name)){
+            // DBにデータが存在する場合は取得し、存在しない場合はDBにデータを登録した上でインスタンスを取得する
+            $tag = Tag::firstOrCreate([
+              'name' => $request->$tag_name
+            ]);
+            $tag_ids[] = $tag->id;
+          }
+        }
+
+        // 中間テーブルに登録（detachで一度全部のタグとの関連付けをクリアする）
+        $question->tags()->detach();
+        $question->tags()->attach($tag_ids);
 
       // リダイレクトする
       // sessionフラッシュにメッセージ格納
@@ -97,6 +126,7 @@ class QuestionsController extends Controller
     public function delete($id) {
       
       $question = Question::find($id);
+      $question->delete();
 
       // リダイレクトする
       // sessionフラッシュにメッセージ格納
@@ -104,13 +134,7 @@ class QuestionsController extends Controller
       
     }
 
-    public function mypage()
-    {
-      // $questions = Auth::user()->questions()->get();
-    //  dd($questions);
-      
-      // $user_id = Auth::user()->id;
-      // $questions = Question::where('user_id', $user_id)->tags;
+    public function mypage() {
 
       // withメソッドでクエリ回数を減らせる
       $user = Auth::user()->with([
