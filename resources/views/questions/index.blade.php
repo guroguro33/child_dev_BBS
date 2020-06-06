@@ -6,6 +6,8 @@
     <h2 class="hero-msg">相談してみませんか？</h2>
   </section>
   
+  <index-component></index-component>
+
   <section class="btn-group d-flex col-6 mx-auto my-4 p-4" role="group">
     <button type="button" class="btn btn-info w-100">新着</button>
     <button type="button" class="btn btn-outline-info w-100">タグ</button>

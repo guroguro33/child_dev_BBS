@@ -93,6 +93,7 @@
       <main class="">
           @yield('content')
       </main>
+      <index-component></index-component>
 
       <footer id="footer" class="d-flex justify-content-center align-items-center w-100">
       <p class="f-text h6">© Copyright | Kurosuke All Right Reserved</p>

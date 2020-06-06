@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use App\User;
+use App\Answer;
 use App\TagMap;
 use App\Question;
 use Illuminate\Http\Request;
@@ -144,13 +145,19 @@ class QuestionsController extends Controller
         'questions' => function($query) {
           $query->orderBy('created_at','desc');
         },
+        'answers',
         // ネストしたメソッド
-        'questions.tags'
+        'questions.tags',
+        'answers.likes',
+        'answers.user'
       ])->get()->first();
+
+      // 全answerを取得
+      $answers = Answer::all();
  
-      // dd($user->questions);
+      // dd($answers->toArray());
       
-      return view('questions.mypage', compact('user'));
+      return view('questions.mypage', compact('user', 'answers'));
     }
 
 }
