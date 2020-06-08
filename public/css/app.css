@@ -11043,6 +11043,10 @@ footer {
   fill: #E66767;
 }
 
+.likes {
+  cursor: pointer;
+}
+
 .item-enter-active,
 .item-leave-active {
   transition: opacity 0.5s;

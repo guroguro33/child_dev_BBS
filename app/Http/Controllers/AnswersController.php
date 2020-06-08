@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
 use App\Answer;
 use App\Question;
 use Illuminate\Http\Request;
@@ -39,5 +40,29 @@ class AnswersController extends Controller
       // その時にsessionフラッシュにメッセージを入れる
       return redirect()->route('questions.show', ['id' => $question_id])->with('flash_message', __('Deleted.'));
 
+    }
+
+    public function addLike(Request $request){
+      $answer_id = $request->id;
+
+      // ログインしているユーザー情報
+      $user = Auth::user();
+      // お気に入り済みか確認
+      $like = $user->likes()->where('answer_id', $answer_id)->first();
+      // お気に入りだった場合、お気に入りから削除
+      if($like){
+        $like->delete();
+        return;
+        
+      } else {
+        // お気に入りではない場合、お気に入りに登録
+        $like = new Like;
+        
+        $like->user_id = $user->id;
+        $like->answer_id = $answer_id;
+        $like->save();
+
+        return;
+      }
     }
 }

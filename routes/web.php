@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/mypage', 'QuestionsController@mypage')->name('questions.mypage'); // マイページ
   Route::post('/question/{id}/show', 'AnswersController@store')->name('answers.store'); // 回答登録
   Route::get('/question/{id}/del', 'AnswersController@delete')->name('answers.delete'); // 回答削除
+  Route::post('/answer/like', 'AnswersController@addLike')->name('answers.addLike'); // お気に入り追加
 });
 
 

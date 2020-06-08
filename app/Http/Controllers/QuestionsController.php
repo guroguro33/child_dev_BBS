@@ -41,12 +41,14 @@ class QuestionsController extends Controller
       $count = $question->answers()->count();
       $answers = $question->with([
         'answers',
-        'answers.user'
+        'answers.user',
+        'answers.likes',
       ])->get()->find($id);
+      $loginFlg = Auth::check();
 
-      // dd($answers->toArray());
+      // dd($loginFlg);
 
-      return view('questions.show', compact('question', 'ques_user', 'tags', 'count', 'answers'));
+      return view('questions.show', compact('question', 'ques_user', 'tags', 'count', 'answers', 'loginFlg'));
     }
 
     public function create()

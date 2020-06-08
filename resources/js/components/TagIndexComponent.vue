@@ -20,7 +20,6 @@
     </section>
 
     <section class="container">
-      <!-- <div class="row mb-4"> -->
       <transition-group name="item" tag="div" class="row mb-4" mode="out-in" appear>
 
         <div v-for="question in sortQuestions" :key="question" class="col-lg-6 mb-4">
@@ -39,7 +38,6 @@
           </div>
         </div>
       </transition-group>
-      <!-- </div> -->
     </section>
   </div>
 </template>

@@ -24,8 +24,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-// Vue.component('new-index-component', require('./components/NewIndexComponent.vue').default);
-// Vue.component('tag-index-component', require('./components/TagIndexComponent.vue'));
+Vue.component('likes-component', require('./components/LikesComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
