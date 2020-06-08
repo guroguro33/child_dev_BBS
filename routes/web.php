@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'QuestionsController@index')->name('questions.index'); // ホーム画面
+Route::get('/tag', 'QuestionsController@index')->name('questions.index'); // タグのホーム画面(vueルーターで遷移するが、ここで通しておかないと404エラーになる)
 Route::get('/questions/{id}/show', 'QuestionsController@show')->name('questions.show'); //  質問詳細画面
 
 Route::group(['middleware' => 'auth'], function() {

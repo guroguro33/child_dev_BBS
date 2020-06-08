@@ -16,12 +16,15 @@ class QuestionsController extends Controller
     public function index() {
 
       $questions = Question::with([
-        'tags'
+        'tags',
+        'answers'
       ])->get();
-      
-      // dd($questions->toArray());
 
-      return view('questions.index', compact('questions'));
+      $tags = Tag::all();
+      
+      // dd($tags->toArray());
+
+      return view('questions.index', compact('questions', 'tags'));
     }
     
     public function show($id) {
