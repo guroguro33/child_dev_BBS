@@ -17,7 +17,6 @@ class CreateTagsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->timestamps();
-            $table->boolean('delete_flg')->default('0');
         });
     }
 

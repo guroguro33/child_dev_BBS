@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use App\Like;
 use App\User;
 use App\Answer;
 use App\TagMap;
@@ -45,10 +46,11 @@ class QuestionsController extends Controller
         'answers.likes',
       ])->get()->find($id);
       $loginFlg = Auth::check();
+      $user = Auth::user();
 
-      // dd($loginFlg);
+      // dd($user->toArray());
 
-      return view('questions.show', compact('question', 'ques_user', 'tags', 'count', 'answers', 'loginFlg'));
+      return view('questions.show', compact('question', 'ques_user', 'tags', 'count', 'answers', 'loginFlg', 'user'));
     }
 
     public function create()

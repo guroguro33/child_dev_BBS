@@ -18,11 +18,10 @@ class CreateLikesTable extends Migration
             $table->unsignedBigInteger('answer_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            $table->boolean('delete_flg')->default('0');
 
             // FK設定
-            $table->foreign('answer_id')->references('id')->on('answers');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

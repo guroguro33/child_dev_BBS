@@ -18,10 +18,10 @@
         <div class="card">
           <div class="card-body">
             <a href="{{ route('questions.show', $question->id ) }}" class="h5 card-title text-left">{{ $question->title }}</a>
-            <p class="card-text text-left">{{ mb_strimwidth($question->detail, 0, 30, "...") }}</p>
+            <p class="card-text text-left">{{ mb_strimwidth($question->detail, 0, 120, "...") }}</p>
             <div class="text-left">
               @foreach ($question->tags as $tag)
-              <span class="badge badge-info p-1">{{ $tag->name }}</span>
+              <span class="badge badge-info p-2">{{ $tag->name }}</span>
               @endforeach
             </div>
             <div class="text-secondary d-flex justify-content-between mt-3">
@@ -61,7 +61,7 @@
             </div>
           </div>
           <a href="{{ route('questions.show', $answer->question_id) }}" class="card-text d-block text-left mt-4">
-              {{ $answer->detail }}</a>
+              {!! nl2br(e(mb_strimwidth($answer->detail,0 ,120, "..."))) !!}</a>
 
           <div class="text-secondary d-flex justify-content-between my-2">
             <time>{{ date('Y/m/d  G:i', strtotime($answer->created_at)) }}</time>

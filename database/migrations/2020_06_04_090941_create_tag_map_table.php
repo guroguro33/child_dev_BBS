@@ -18,7 +18,6 @@ class CreateTagMapTable extends Migration
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('tag_id');
             $table->timestamps();
-            $table->boolean('delete_flg')->default('0');
 
             // FK設定
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');

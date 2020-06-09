@@ -8,7 +8,7 @@
         <div class="text-secondary d-flex justify-content-between my-2">
           <div class="">
             @foreach ($tags as $tag)
-            <span class="badge badge-info p-1">{{ $tag->name }}</span>
+            <span class="badge badge-info p-2">{{ $tag->name }}</span>
             @endforeach
           </div>
 
@@ -23,7 +23,7 @@
         </div>
         <h5 class="card-title text-left pt-3">{{ $question->title }}</h5>
         <p class="card-text text-left">
-          {{ $question->detail }}
+          {!! nl2br(e($question->detail)) !!}
         <div class="text-secondary d-flex justify-content-between my-2">
           <time>{{ date('Y/m/d  G:i', strtotime($question->created_at)) }}</time>
           <p class="">{{ $ques_user->name }}</p>
@@ -39,7 +39,13 @@
     <div class="card mb-3">
       <div class="card-body">
         <div class="text-secondary d-flex justify-content-between my-2">
-          <likes-component :answer="{{$answer}}" login-flg="{{$loginFlg}}" id="{{$answer->id}}"></likes-component>
+
+          @if(Auth::check())
+          <likes-component :answer="{{$answer}}" login-flg="{{true}}" user-id="{{$user->id}}"></likes-component>
+          @else
+          <likes-component :answer="{{$answer}}" login-flg="{{false}}" user-id=""></likes-component>
+          @endif
+
           @if(Auth::check())
             @if(Auth::user()->id === $answer->user_id)
             <form action="{{ route('answers.delete', $answer->id) }}" method="GET">
@@ -48,9 +54,10 @@
             </form>
             @endif
           @endif
+
         </div>
         <p class="card-text text-left mt-4">
-          {{ $answer->detail }}</p>
+          {!! nl2br(e($answer->detail)) !!}</p>
 
         <div class="text-secondary d-flex justify-content-between my-2">
           <time>{{ date('Y/m/d G:i', strtotime($answer->created_at)) }}</time>

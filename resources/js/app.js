@@ -36,6 +36,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: "history",
+  base: "/child-dev-bbs/",  // xserverの本番環境のみ必要
   routes: [
     {
       path: '/',

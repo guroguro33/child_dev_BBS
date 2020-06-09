@@ -19,7 +19,6 @@ class CreateQuestionsTable extends Migration
             $table->string('title');
             $table->text('detail');
             $table->timestamps();
-            $table->boolean('delete_flg')->default('0');
             // FK設定
             $table->foreign('user_id')->references('id')->on('users');
         });

@@ -1944,43 +1944,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["answer", "loginFlg", "id"],
+  props: ["answer", "loginFlg", "userId"],
   data: function data() {
     return {
-      disabled: false
+      isActive: false,
+      likeCount: this.answer.likes.length
     };
   },
+  mounted: function mounted() {
+    this.activeFunc();
+  },
   methods: {
+    activeFunc: function activeFunc() {
+      var that = this; // お気に入りレコードからユーザーが一致するか確認
+
+      this.answer.likes.forEach(function (val) {
+        // 一致していたら、isActiveをtrueにする
+        if (val.user_id == that.userId) {
+          that.isActive = true;
+        }
+      });
+    },
     addLike: function addLike() {
-      this.disabled = true;
-      axios.post("/answer/like", {
-        id: this.id
+      var that = this;
+      axios.post("/child-dev-bbs/answer/like", {
+        id: this.answer.id
       }).then(function (response) {
-        console.log(response);
+        // likeCountを更新
+        that.likeCount = response.data; // isActiveを反転
+
+        that.isActive = !that.isActive;
       })["catch"](function (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code
+        if (error.response) {// The request was made and the server responded with a status code
           // that falls out of the range of 2xx
-          console.log(error.response.data);
-          console.log(error.response.status); // 例：400
-
-          console.log(error.response.statusText); // Bad Request
-
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
+          // console.log(error.response.data);
+          // console.log(error.response.status); // 例：400
+          // console.log(error.response.statusText); // Bad Request
+          // console.log(error.response.headers);
+        } else if (error.request) {// The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
           // http.ClientRequest in node.js
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log("Error", error.message);
-        }
+          // console.log(error.request);
+        } else {} // Something happened in setting up the request that triggered an Error
+          // console.log("Error", error.message);
+          // console.log(error.config);
 
-        console.log(error.config);
       });
     }
-  }
+  } // デバック用
+  // watch: {
+  //   likeCount: function(newValue, oldValue) {
+  //     console.log("newVlaue:" + newValue);
+  //     console.log("oldVlaue:" + oldValue);
+  //   }
+  // }
+
 });
 
 /***/ }),
@@ -37684,7 +37702,7 @@ var render = function() {
             _c(
               "svg",
               {
-                staticClass: "heart",
+                class: { heart: _vm.isActive },
                 staticStyle: { width: "30px", height: "30px", opacity: "1" },
                 attrs: {
                   version: "1.1",
@@ -37711,16 +37729,13 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("span", { staticClass: "pl-2" }, [
-              _vm._v(_vm._s(_vm.answer.likes.length))
-            ])
+            _c("span", { staticClass: "pl-2" }, [_vm._v(_vm._s(_vm.likeCount))])
           ]
         )
       : _c("div", { staticClass: "ml-2 pt-1" }, [
           _c(
             "svg",
             {
-              staticClass: "heart",
               staticStyle: { width: "30px", height: "30px", opacity: "1" },
               attrs: {
                 version: "1.1",
@@ -37747,9 +37762,7 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("span", { staticClass: "pl-2" }, [
-            _vm._v(_vm._s(_vm.answer.likes.length))
-          ])
+          _c("span", { staticClass: "pl-2" }, [_vm._v(_vm._s(_vm.likeCount))])
         ])
   ])
 }
@@ -37812,7 +37825,7 @@ var render = function() {
           "transition-group",
           {
             staticClass: "row",
-            attrs: { name: "item", tag: "div", mode: "out-in", appear: "" }
+            attrs: { name: "item", tag: "div", mode: "in-out", appear: "" }
           },
           _vm._l(_vm.questions, function(question) {
             return _c(
@@ -37831,7 +37844,7 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("p", { staticClass: "card-text text-left" }, [
-                      _vm._v(_vm._s(question.detail.substr(0, 30)) + "...")
+                      _vm._v(_vm._s(question.detail.substr(0, 120)) + "...")
                     ]),
                     _vm._v(" "),
                     _c(
@@ -37967,61 +37980,65 @@ var render = function() {
           "transition-group",
           {
             staticClass: "row mb-4",
-            attrs: { name: "item", tag: "div", mode: "out-in", appear: "" }
+            attrs: { name: "item", tag: "div", mode: "in-out", appear: "" }
           },
           _vm._l(_vm.sortQuestions, function(question) {
-            return _c("div", { key: question, staticClass: "col-lg-6 mb-4" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "h5 card-title text-left",
-                      attrs: { href: "/questions/" + question.id + "/show" }
-                    },
-                    [_vm._v(_vm._s(question.title))]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text text-left" }, [
-                    _vm._v(_vm._s(question.detail.substr(0, 30)) + "...")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "text-left" },
-                    _vm._l(question.tags, function(tag) {
-                      return _c(
-                        "span",
-                        {
-                          key: tag.id,
-                          staticClass: "badge badge-info mr-2 p-2"
-                        },
-                        [_vm._v(_vm._s(tag.name))]
-                      )
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "text-secondary d-flex justify-content-between mt-3"
-                    },
-                    [
-                      _c("p", { staticClass: "a-count" }, [
-                        _vm._v("回答 "),
-                        _c("span", [_vm._v(_vm._s(question.answers.length))])
-                      ]),
-                      _vm._v(" "),
-                      _c("time", [
-                        _vm._v(_vm._s(question.created_at.substr(0, 16)))
-                      ])
-                    ]
-                  )
+            return _c(
+              "div",
+              { key: question.id, staticClass: "col-lg-6 mb-4" },
+              [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "h5 card-title text-left",
+                        attrs: { href: "/questions/" + question.id + "/show" }
+                      },
+                      [_vm._v(_vm._s(question.title))]
+                    ),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text text-left" }, [
+                      _vm._v(_vm._s(question.detail.substr(0, 120)) + "...")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "text-left" },
+                      _vm._l(question.tags, function(tag) {
+                        return _c(
+                          "span",
+                          {
+                            key: tag.id,
+                            staticClass: "badge badge-info mr-2 p-2"
+                          },
+                          [_vm._v(_vm._s(tag.name))]
+                        )
+                      }),
+                      0
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "text-secondary d-flex justify-content-between mt-3"
+                      },
+                      [
+                        _c("p", { staticClass: "a-count" }, [
+                          _vm._v("回答 "),
+                          _c("span", [_vm._v(_vm._s(question.answers.length))])
+                        ]),
+                        _vm._v(" "),
+                        _c("time", [
+                          _vm._v(_vm._s(question.created_at.substr(0, 16)))
+                        ])
+                      ]
+                    )
+                  ])
                 ])
-              ])
-            ])
+              ]
+            )
           }),
           0
         )
@@ -53261,6 +53278,8 @@ Vue.component('likes-component', __webpack_require__(/*! ./components/LikesCompo
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: "history",
+  base: "/child-dev-bbs/",
+  // xserverの本番環境のみ必要
   routes: [{
     path: '/',
     name: 'newIndex',

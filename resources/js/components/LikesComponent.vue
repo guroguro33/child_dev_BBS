@@ -2,7 +2,7 @@
 <div>
   <!-- ログイン済みだといいね可能 -->
   <a class="ml-2 pt-1 d-block likes" v-if="loginFlg" @click="addLike">
-    <svg version="1.1" id="_x32_" class="heart" xmlns="http://www.w3.org/2000/svg"
+    <svg version="1.1" id="_x32_" :class="{heart: isActive}" xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" fill="#4B4B4B"
       style="width: 30px; height: 30px; opacity: 1;" xml:space="preserve">
       <g>
@@ -13,11 +13,11 @@
         </path>
       </g>
     </svg>
-    <span class="pl-2">{{answer.likes.length}}</span>
+    <span class="pl-2">{{likeCount}}</span>
   </a>
   <!-- 未ログインだといいね不可 -->
   <div class="ml-2 pt-1" v-else>
-    <svg version="1.1" id="_x32_" class="heart" xmlns="http://www.w3.org/2000/svg"
+    <svg version="1.1" id="_x32_" class="" xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" fill="#4B4B4B"
       style="width: 30px; height: 30px; opacity: 1;" xml:space="preserve">
       <g>
@@ -28,49 +28,73 @@
         </path>
       </g>
     </svg>
-    <span class="pl-2">{{answer.likes.length}}</span>
+    <span class="pl-2">{{likeCount}}</span>
   </div>
 </div>
 </template>
 
 <script>
 export default {
-  props: ["answer", "loginFlg", "id"],
+  props: ["answer", "loginFlg", "userId"],
   data: function() {
     return {
-      disabled: false
+      isActive: false,
+      likeCount: this.answer.likes.length
     };
   },
+  mounted() {
+    this.activeFunc();
+  },
   methods: {
+    activeFunc() {
+      let that = this;
+      // お気に入りレコードからユーザーが一致するか確認
+      this.answer.likes.forEach(function(val) {
+        // 一致していたら、isActiveをtrueにする
+        if (val.user_id == that.userId) {
+          that.isActive = true;
+        }
+      });
+    },
     addLike() {
-      this.disabled = true;
+      let that = this;
       axios
-        .post("/answer/like", {
-          id: this.id
+        .post("/child-dev-bbs/answer/like", {
+          id: this.answer.id
         })
-        .then(function(response) {
-          console.log(response);
+        .then(response => {
+          // likeCountを更新
+          that.likeCount = response.data;
+          // isActiveを反転
+          that.isActive = !that.isActive;
         })
         .catch(function(error) {
           if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
-            console.log(error.response.data);
-            console.log(error.response.status); // 例：400
-            console.log(error.response.statusText); // Bad Request
-            console.log(error.response.headers);
+            // console.log(error.response.data);
+            // console.log(error.response.status); // 例：400
+            // console.log(error.response.statusText); // Bad Request
+            // console.log(error.response.headers);
           } else if (error.request) {
             // The request was made but no response was received
             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
             // http.ClientRequest in node.js
-            console.log(error.request);
+            // console.log(error.request);
           } else {
             // Something happened in setting up the request that triggered an Error
-            console.log("Error", error.message);
+            // console.log("Error", error.message);
           }
-          console.log(error.config);
+          // console.log(error.config);
         });
     }
   }
+  // デバック用
+  // watch: {
+  //   likeCount: function(newValue, oldValue) {
+  //     console.log("newVlaue:" + newValue);
+  //     console.log("oldVlaue:" + oldValue);
+  //   }
+  // }
 };
 </script>

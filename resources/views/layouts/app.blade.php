@@ -43,7 +43,7 @@
                   <!-- Authentication Links -->
                   @guest
                       <li class="nav-item mr-2">
-                          <a class="nav-link" href="/">{{ __('Home') }}</a>
+                          <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                       </li>
                       <li class="nav-item mr-2">
                           <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -55,7 +55,7 @@
                       @endif
                   @else
                       <li class="nav-item mr-2">
-                          <a class="nav-link" href="/">{{ __('Home') }}</a>
+                          <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                       </li>
                       <li class="nav-item mr-2">
                           <a class="nav-link" href="{{ route('questions.create') }}">{{ __('Do Question') }}</a>

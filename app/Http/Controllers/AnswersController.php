@@ -52,8 +52,11 @@ class AnswersController extends Controller
       // お気に入りだった場合、お気に入りから削除
       if($like){
         $like->delete();
-        return;
-        
+        // お気に入り数を取得
+        $likeCount = Answer::find($answer_id)->likes()->count();
+
+        return $likeCount;
+
       } else {
         // お気に入りではない場合、お気に入りに登録
         $like = new Like;
@@ -61,8 +64,11 @@ class AnswersController extends Controller
         $like->user_id = $user->id;
         $like->answer_id = $answer_id;
         $like->save();
+        
+        // お気に入り数を取得
+        $likeCount = Answer::find($answer_id)->likes()->count();
 
-        return;
+        return $likeCount;
       }
     }
 }
