@@ -60,6 +60,7 @@ export default {
       let that = this;
       axios
         .post("/child-dev-bbs/answer/like", {
+          // .post("/answer/like", {
           id: this.answer.id
         })
         .then(response => {

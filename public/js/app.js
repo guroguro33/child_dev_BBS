@@ -1968,6 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
     addLike: function addLike() {
       var that = this;
       axios.post("/child-dev-bbs/answer/like", {
+        // .post("/answer/like", {
         id: this.answer.id
       }).then(function (response) {
         // likeCountを更新

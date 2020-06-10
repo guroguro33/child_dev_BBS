@@ -12,13 +12,13 @@
             @endforeach
           </div>
 
-          @if(Auth::check())
-            @if(Auth::user()->id === $question->user_id)
+          @auth
+            @if($user->id === $question->user_id)
             <form action="{{ route('questions.edit', $question->id ) }}" method="GET">
               <input type="submit" class="btn btn-primary" value="編集">
             </form>
             @endif
-          @endif
+          @endauth
 
         </div>
         <h5 class="card-title text-left pt-3">{{ $question->title }}</h5>
@@ -40,20 +40,20 @@
       <div class="card-body">
         <div class="text-secondary d-flex justify-content-between my-2">
 
-          @if(Auth::check())
+          @auth
           <likes-component :answer="{{$answer}}" login-flg="{{true}}" user-id="{{$user->id}}"></likes-component>
           @else
           <likes-component :answer="{{$answer}}" login-flg="{{false}}" user-id=""></likes-component>
-          @endif
+          @endauth
 
-          @if(Auth::check())
-            @if(Auth::user()->id === $answer->user_id)
+          @auth
+            @if($user->id === $answer->user_id)
             <form action="{{ route('answers.delete', $answer->id) }}" method="GET">
               @csrf
               <input type="submit" class="btn btn-danger" value="削除" onclick="return confirm('本当に削除してよろしいですか？')">
             </form>
             @endif
-          @endif
+          @endauth
 
         </div>
         <p class="card-text text-left mt-4">
@@ -68,7 +68,7 @@
     @endforeach
   </div>
 
-  @if(Auth::check())
+  @auth
   
   <h5 class="text-secondary py-3">回答する</h5>
 
@@ -84,7 +84,7 @@
     <input type="submit" class="btn btn-info d-block px-5 mx-auto my-4" value="登録"
       onclick="return confirm('この内容で登録してよろしいですか？')">
   </form>
-  @endif
+  @endauth
 
   <a href="" class="text-secondary mb-4">もどる</a>
 
