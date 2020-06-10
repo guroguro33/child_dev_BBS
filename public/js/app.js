@@ -1967,7 +1967,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     addLike: function addLike() {
       var that = this;
-      axios.post("/child-dev-bbs/answer/like", {
+      axios.post("/answer/like", {
         id: this.answer.id
       }).then(function (response) {
         // likeCountを更新
@@ -37838,10 +37838,7 @@ var render = function() {
                       "a",
                       {
                         staticClass: "h5 card-title text-left",
-                        attrs: {
-                          href:
-                            "/child-dev-bbs/questions/" + question.id + "/show"
-                        }
+                        attrs: { href: "/questions/" + question.id + "/show" }
                       },
                       [_vm._v(_vm._s(question.title))]
                     ),
@@ -37996,10 +37993,7 @@ var render = function() {
                       "a",
                       {
                         staticClass: "h5 card-title text-left",
-                        attrs: {
-                          href:
-                            "/child-dev-bbs/questions/" + question.id + "/show"
-                        }
+                        attrs: { href: "/questions/" + question.id + "/show" }
                       },
                       [_vm._v(_vm._s(question.title))]
                     ),
