@@ -48,7 +48,7 @@ class QuestionsController extends Controller
       $loginFlg = Auth::check();
       $user = Auth::user();
 
-      // dd($user->toArray());
+      // dd($question->toArray());
 
       return view('questions.show', compact('question', 'ques_user', 'tags', 'count', 'answers', 'loginFlg', 'user'));
     }

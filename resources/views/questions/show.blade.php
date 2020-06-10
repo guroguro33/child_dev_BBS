@@ -13,10 +13,12 @@
           </div>
 
           @auth
-            @if($user->id === $question->user_id)
+            @if($user->id == $question->user_id)
             <form action="{{ route('questions.edit', $question->id ) }}" method="GET">
               <input type="submit" class="btn btn-primary" value="編集">
             </form>
+            @else
+            <span>error</span>
             @endif
           @endauth
 
