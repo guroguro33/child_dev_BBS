@@ -121,6 +121,7 @@ class QuestionsController extends Controller
             $tag = Tag::firstOrCreate([
               'name' => $request->$tag_name
             ]);
+            // tagのidを配列につめる
             $tag_ids[] = $tag->id;
           }
         }
@@ -148,6 +149,8 @@ class QuestionsController extends Controller
     public function mypage() {
 
       // withメソッドでクエリ回数を減らせる
+      $user_id = Auth::id();
+      // 全ユーザーの情報が取れてしまうので、最後にfindでログインユーザーの情報に限定した。
       $user = Auth::user()->with([
         'questions' => function($query) {
           $query->orderBy('created_at','desc');
@@ -157,12 +160,12 @@ class QuestionsController extends Controller
         'questions.tags',
         'answers.likes',
         'answers.user'
-      ])->get()->first();
+      ])->get()->find($user_id);
 
       // 全answerを取得
       $answers = Answer::all();
  
-      // dd($answers->toArray());
+      // dd($user->toArray());
       
       return view('questions.mypage', compact('user', 'answers'));
     }
