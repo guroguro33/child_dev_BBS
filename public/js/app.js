@@ -37838,7 +37838,10 @@ var render = function() {
                       "a",
                       {
                         staticClass: "h5 card-title text-left",
-                        attrs: { href: "/questions/" + question.id + "/show" }
+                        attrs: {
+                          href:
+                            "/child-dev-bbs/questions/" + question.id + "/show"
+                        }
                       },
                       [_vm._v(_vm._s(question.title))]
                     ),
@@ -37993,7 +37996,10 @@ var render = function() {
                       "a",
                       {
                         staticClass: "h5 card-title text-left",
-                        attrs: { href: "/questions/" + question.id + "/show" }
+                        attrs: {
+                          href:
+                            "/child-dev-bbs/questions/" + question.id + "/show"
+                        }
                       },
                       [_vm._v(_vm._s(question.title))]
                     ),

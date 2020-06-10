@@ -25,7 +25,7 @@
         <div v-for="question in sortQuestions" :key="question.id" class="col-lg-6 mb-4">
           <div class="card">
             <div class="card-body">
-              <a :href=" '/questions/' + question.id + '/show'" class="h5 card-title text-left">{{question.title}}</a>
+              <a :href=" '/child-dev-bbs/questions/' + question.id + '/show'" class="h5 card-title text-left">{{question.title}}</a>
               <p class="card-text text-left">{{question.detail.substr(0, 120)}}...</p>
               <div class="text-left">
                 <span v-for="tag in question.tags" :key="tag.id" class="badge badge-info mr-2 p-2">{{tag.name}}</span>
