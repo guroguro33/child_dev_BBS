@@ -17,8 +17,6 @@
             <form action="{{ route('questions.edit', $question->id ) }}" method="GET">
               <input type="submit" class="btn btn-primary" value="編集">
             </form>
-            @else
-            <span>error</span>
             @endif
           @endauth
 
@@ -49,7 +47,7 @@
           @endauth
 
           @auth
-            @if($user->id === $answer->user_id)
+            @if($user->id == $answer->user_id)
             <form action="{{ route('answers.delete', $answer->id) }}" method="GET">
               @csrf
               <input type="submit" class="btn btn-danger" value="削除" onclick="return confirm('本当に削除してよろしいですか？')">
