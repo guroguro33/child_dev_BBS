@@ -86,7 +86,7 @@
   </form>
   @endauth
 
-  <a href="" class="text-secondary mb-4">もどる</a>
+  <a href="{{ URL::previous() }}" class="text-secondary mb-4">もどる</a>
 
 </div>
 @endsection

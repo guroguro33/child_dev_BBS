@@ -75,7 +75,7 @@
   </div>
   </section>
 
-  <a href="" class="text-secondary mb-4">&lt; もどる</a>
+  <a href="{{ URL::previous() }}" class="text-secondary mb-4">&lt; もどる</a>
 
 </div>
 @endsection
