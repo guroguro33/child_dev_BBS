@@ -1,11 +1,11 @@
-![ロゴ](https://user-images.githubusercontent.com/48667277/87260946-3c881300-c4ef-11ea-9c7d-ad2a02a663af.png)
+# 発達相談WEB
  
 ## アプリケーションの概要
  
 Laravelとvue.jsを使った発達相談に関する質問掲示板サイトです。
 [デモページ](https://kurosuke-web.com/child-dev-bbs/)
 
-***画面イメージ***
+## 画面イメージ ##
  
 ![TOPイメージ](https://user-images.githubusercontent.com/48667277/87255736-582bf300-c4c8-11ea-85a1-a80205b0a862.png)
  
