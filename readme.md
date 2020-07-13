@@ -1,13 +1,10 @@
-# アプリケーションの名前
- 
-発達相談WEB
+![ロゴ](https://user-images.githubusercontent.com/48667277/87260946-3c881300-c4ef-11ea-9c7d-ad2a02a663af.png)
  
 ## アプリケーションの概要
  
 Laravelとvue.jsを使った発達相談に関する質問掲示板サイトです。
 [デモページ](https://kurosuke-web.com/child-dev-bbs/)
 
- 
 ***画面イメージ***
  
 ![TOPイメージ](https://user-images.githubusercontent.com/48667277/87255736-582bf300-c4c8-11ea-85a1-a80205b0a862.png)
@@ -48,12 +45,12 @@ Laravelとvue.jsを使った発達相談に関する質問掲示板サイトで�
 ## 設計資料
  
 1. [要件定義](https://docs.google.com/spreadsheets/d/1WsrrEG_yLDkcWZoVVTVjKHtMI3T8MTQ36itLp0MqKe8/edit?usp=sharing)
-2. [ER図]()
+2. [ER図](発達質問サイトER図.drawio.pdf)
   
 ## 作者
 
-* くろすけ
-* [@guroguro33](https://twitter.com/guroguro33)
+* 作成者：くろすけ
+* Twitter：[@guroguro33](https://twitter.com/guroguro33)
  
 ## ライセンス
  
