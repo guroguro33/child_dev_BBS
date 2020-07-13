@@ -5,6 +5,12 @@
 Laravelとvue.jsを使った発達相談に関する質問掲示板サイトです。
 [デモページ](https://kurosuke-web.com/child-dev-bbs/)
 
+デモサイトでご利用ください
+
+ログインID：test@example.com
+
+パスワード：password
+
 ## 画面イメージ ##
  
 ![TOPイメージ](https://user-images.githubusercontent.com/48667277/87255736-582bf300-c4c8-11ea-85a1-a80205b0a862.png)
